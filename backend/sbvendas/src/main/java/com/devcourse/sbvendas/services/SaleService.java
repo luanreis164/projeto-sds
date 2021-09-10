@@ -1,6 +1,8 @@
 package com.devcourse.sbvendas.services;
 
 import com.devcourse.sbvendas.dto.SaleDTO;
+import com.devcourse.sbvendas.dto.SaleSucessDTO;
+import com.devcourse.sbvendas.dto.SaleSumDTO;
 import com.devcourse.sbvendas.dto.SellerDTO;
 import com.devcourse.sbvendas.entitites.Sale;
 import com.devcourse.sbvendas.entitites.Seller;
@@ -12,6 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -30,5 +33,17 @@ public class SaleService {
         return result.map(x -> new SaleDTO(x));
 
     }
+
+    @Transactional(readOnly = true)
+    public List<SaleSumDTO> amountGroupedBySeller(){
+        return saleRepository.amountGroupedBySeller();
+
+    }
+
+    @Transactional(readOnly = true)
+    public List<SaleSucessDTO> sucessGroupedBySeller(){
+        return saleRepository.sucessGroupedBySeller();
+    }
+
 
 }
